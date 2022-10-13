@@ -1,0 +1,51 @@
+package org.thoughtcrime.securesms.keyvalue;
+
+import androidx.annotation.NonNull;
+
+import java.util.Collections;
+import java.util.List;
+
+public class UiHints extends SignalStoreValues {
+
+  private static final String HAS_SEEN_GROUP_SETTINGS_MENU_TOAST     = "uihints.has_seen_group_settings_menu_toast";
+  private static final String HAS_CONFIRMED_DELETE_FOR_EVERYONE_ONCE = "uihints.has_confirmed_delete_for_everyone_once";
+  private static final String HAS_SET_OR_SKIPPED_USERNAME_CREATION   = "uihints.has_set_or_skipped_username_creation";
+
+  UiHints(@NonNull KeyValueStore store) {
+    super(store);
+  }
+
+  @Override
+  void onFirstEverAppLaunch() {
+    markHasSeenGroupSettingsMenuToast();
+  }
+
+  @Override
+  @NonNull List<String> getKeysToIncludeInBackup() {
+    return Collections.emptyList();
+  }
+
+  public void markHasSeenGroupSettingsMenuToast() {
+    putBoolean(HAS_SEEN_GROUP_SETTINGS_MENU_TOAST, true);
+  }
+
+  public boolean hasSeenGroupSettingsMenuToast() {
+    return getBoolean(HAS_SEEN_GROUP_SETTINGS_MENU_TOAST, false);
+  }
+
+  public void markHasConfirmedDeleteForEveryoneOnce() {
+    putBoolean(HAS_CONFIRMED_DELETE_FOR_EVERYONE_ONCE, true);
+  }
+
+  public boolean hasConfirmedDeleteForEveryoneOnce() {
+    return getBoolean(HAS_CONFIRMED_DELETE_FOR_EVERYONE_ONCE, false);
+  }
+
+  public boolean hasSetOrSkippedUsernameCreation() {
+    return getBoolean(HAS_SET_OR_SKIPPED_USERNAME_CREATION, false);
+  }
+
+  public void markHasSetOrSkippedUsernameCreation() {
+    putBoolean(HAS_SET_OR_SKIPPED_USERNAME_CREATION, true);
+  }
+}
